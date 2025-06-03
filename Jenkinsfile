@@ -14,9 +14,18 @@ pipeline {
             }
         }
 
+        stage('Prepare') {
+            steps {
+                // Download dependencies and build to generate export data needed by golangci-lint
+                sh 'go clean -modcache || true'
+                sh 'go mod download'
+                sh 'go build ./...'
+            }
+        }
+
         stage('Lint') {
             steps {
-               sh 'golangci-lint run ./... --timeout 5m'
+                sh 'golangci-lint run ./... --timeout 5m'
             }
         }
 
