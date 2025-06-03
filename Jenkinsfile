@@ -16,7 +16,7 @@ pipeline {
 
         stage('Lint') {
             steps {
-                sh 'golangci-lint run ./...'
+               sh 'golangci-lint run ./... --timeout 5m'
             }
         }
 
