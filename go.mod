@@ -1,6 +1,6 @@
 module DB_GORM
 
-go 1.23.4
+go 1.23
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
