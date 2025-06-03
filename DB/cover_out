@@ -1,0 +1,8 @@
+mode: set
+DB_GORM/DB/db_initialize.go:21.19,39.16 12 1
+DB_GORM/DB/db_initialize.go:39.16,41.3 1 0
+DB_GORM/DB/db_initialize.go:43.2,44.16 2 1
+DB_GORM/DB/db_initialize.go:44.16,46.3 1 0
+DB_GORM/DB/db_initialize.go:48.2,48.58 1 1
+DB_GORM/DB/db_initialize.go:51.22,57.16 5 1
+DB_GORM/DB/db_initialize.go:57.16,60.3 2 0

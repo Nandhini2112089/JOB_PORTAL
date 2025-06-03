@@ -1,0 +1,6 @@
+prod:
+  username: "test"
+  password: "pass"
+  db_host: "127.0.0.1"
+  db_port: 3306
+  db_name: "job_portal_db"

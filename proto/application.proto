@@ -1,0 +1,42 @@
+syntax="proto3";
+
+option go_package="./pb_file";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service ApplicationService{
+    rpc CreateApplication(ApplicationRequest)returns(ApplicationResponse)
+    {
+        option(google.api.http)={
+            post:"/application"
+            body:"*"
+        };
+    }
+    rpc GetApplication(ApplicationID) returns(ApplicationGetResponse)
+    {
+         option(google.api.http)={
+            get:"/application/{id}"
+        };
+    }
+}
+message ApplicationRequest{
+    int32 user_id=1;
+    int32 job_id=2;
+}
+
+message ApplicationResponse{
+    string message=1;
+}
+
+message ApplicationID{
+    int32 id=1;
+}
+
+message ApplicationGetResponse{
+    int32 user_id=1;
+    int32 job_id=2;
+    string status=3;
+    google.protobuf.Timestamp applied_at=4;
+}
+

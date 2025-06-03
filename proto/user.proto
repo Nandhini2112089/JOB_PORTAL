@@ -1,0 +1,81 @@
+syntax="proto3";
+
+option go_package="./pb_file";
+
+import "google/api/annotations.proto";
+
+service userservice {
+    rpc CreateUser(UserRequest) returns (UserResponse) {
+        option (google.api.http) = {
+            post: "/users"
+            body: "*"
+        };
+    }
+
+    rpc GetUser(UserID) returns (GetResponse) {
+        option (google.api.http) = {
+            get: "/users/{id}"
+        };
+    }
+
+    rpc ListUser(Empty) returns (ListResponse) {
+        option (google.api.http) = {
+            get: "/users"
+        };
+    }
+
+    rpc DeleteUser(UserID) returns (UserResponse) {
+        option (google.api.http) = {
+            delete: "/users/{id}"
+        };
+    }
+
+    rpc UpdateUser(UpdateRequest) returns (UserResponse) {
+        option (google.api.http) = {
+            put: "/users/{id}"
+            body: "*"
+        };
+    }
+}
+
+message UserRequest {
+    string name=1;
+    string contact=2;
+    string skills=3;
+    int32 age=4;
+    int32 experience_years=5;
+    string education=6;
+}
+
+message UserResponse {
+    string message=1;
+}
+
+message UserID {
+    int32 id=1;
+}
+
+message GetResponse {
+    string name=1;
+    string contact=2;
+    string skills=3;
+    int32 age=4;
+    int32 experience_years=5;
+    string education=6;
+}
+
+message Empty {}
+
+message ListResponse {
+    repeated GetResponse users=1;
+}
+
+message UpdateRequest {
+    int32 id=1;
+    string name=2;
+    string contact=3;
+    string skills=4;
+    int32 age=5;
+    int32 experience_years=6;
+    string education=7;
+}

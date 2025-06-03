@@ -1,0 +1,191 @@
+INFO:2025/03/22 22:26:26 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/22 22:26:27 db_initialize.go:35: Database connected successfully
+INFO:2025/03/22 22:26:47 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/22 22:26:48 db_initialize.go:35: Database connected successfully
+INFO:2025/03/22 22:27:20 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/22 22:27:21 db_initialize.go:35: Database connected successfully
+INFO:2025/03/22 22:27:36 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/22 22:27:36 db_initialize.go:35: Database connected successfully
+INFO:2025/03/22 22:28:28 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/22 22:28:29 db_initialize.go:35: Database connected successfully
+INFO:2025/03/22 22:28:57 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/22 22:28:57 db_initialize.go:35: Database connected successfully
+INFO:2025/03/22 22:32:50 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/22 22:32:51 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 00:06:22 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 00:06:22 db_initialize.go:32: AutoMigrate failed: Error 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+INFO:2025/03/23 00:06:22 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 00:06:22 main.go:22: Server starting on port 8080...
+ERROR:2025/03/23 00:08:33 userService.go:57: User Not Found Error 1054 (42S22): Unknown column 'users.user_id' in 'where clause'
+ERROR:2025/03/23 00:08:44 userService.go:57: User Not Found Error 1054 (42S22): Unknown column 'users.user_id' in 'where clause'
+INFO:2025/03/23 00:10:05 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 00:10:06 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 00:10:06 main.go:22: Server starting on port 8080...
+ERROR:2025/03/23 00:11:36 userService.go:39: User Not Found record not found
+ERROR:2025/03/23 00:11:44 userService.go:84: User Not Found record not found
+INFO:2025/03/23 00:44:06 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 00:44:07 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 01:09:16 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 01:09:17 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 01:11:13 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 01:11:14 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 01:14:12 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 01:14:13 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 01:16:35 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 01:16:36 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 01:16:36 main.go:57: REST API Server running on port 8080...
+INFO:2025/03/23 01:21:55 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 01:21:56 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 01:22:45 recruiterService.go:36: Recruiter Not Found record not found
+INFO:2025/03/23 01:26:21 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 01:26:22 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:31:09 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:31:10 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'jobs'
+INFO:2025/03/23 13:31:10 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:34:21 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:34:21 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'jobs'
+INFO:2025/03/23 13:34:21 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:38:53 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:38:53 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'jobs'
+INFO:2025/03/23 13:38:53 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:40:30 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:40:30 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'jobs'
+INFO:2025/03/23 13:40:30 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:45:39 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:45:40 db_initialize.go:32: AutoMigrate failed: Error 6125 (HY000): Failed to add the foreign key constraint. Missing unique key for constraint 'fk_jobs_recruiter' in the referenced table 'jobs'
+INFO:2025/03/23 13:45:40 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:48:04 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:48:04 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'jobs'
+INFO:2025/03/23 13:48:04 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:52:02 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:52:03 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'recruiters'
+INFO:2025/03/23 13:52:03 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:52:46 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:52:46 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'recruiters'
+INFO:2025/03/23 13:52:46 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 13:56:43 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 13:56:44 db_initialize.go:37: AutoMigrate failed for Recruiter: Error 1824 (HY000): Failed to open the referenced table 'recruiters'
+ERROR:2025/03/23 13:56:44 db_initialize.go:42: AutoMigrate failed for Job: Error 1824 (HY000): Failed to open the referenced table 'jobs'
+INFO:2025/03/23 13:56:44 db_initialize.go:45: Database connected successfully
+INFO:2025/03/23 14:01:12 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 14:01:12 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'jobs'
+INFO:2025/03/23 14:01:12 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 14:05:17 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 14:05:17 db_initialize.go:32: AutoMigrate failed: Error 1824 (HY000): Failed to open the referenced table 'jobs'
+INFO:2025/03/23 14:05:17 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 14:13:01 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 14:13:01 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 14:14:18 recruiterService.go:24: Error in Recruiter Creation Error 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`job_portal_db`.`recruiters`, CONSTRAINT `fk_jobs_recruiter` FOREIGN KEY (`recruiter_id`) REFERENCES `jobs` (`job_id`) ON DELETE CASCADE)
+INFO:2025/03/23 14:19:27 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 14:19:27 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 14:19:51 recruiterService.go:24: Error in Recruiter Creation Error 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`job_portal_db`.`recruiters`, CONSTRAINT `fk_jobs_recruiter` FOREIGN KEY (`recruiter_id`) REFERENCES `jobs` (`job_id`) ON DELETE CASCADE)
+INFO:2025/03/23 14:25:36 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 14:25:37 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 14:26:34 recruiterService.go:24: Error in Recruiter Creation Error 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`job_portal_db`.`recruiters`, CONSTRAINT `fk_jobs_recruiter` FOREIGN KEY (`recruiter_id`) REFERENCES `jobs` (`job_id`) ON DELETE CASCADE)
+INFO:2025/03/23 14:29:04 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 14:29:05 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 14:29:32 recruiterService.go:24: Error in Recruiter Creation Error 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`job_portal_db`.`recruiters`, CONSTRAINT `fk_jobs_recruiter` FOREIGN KEY (`recruiter_id`) REFERENCES `jobs` (`job_id`) ON DELETE CASCADE)
+ERROR:2025/03/23 14:31:29 jobServices.go:28: Error in Job Creation Error 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`job_portal_db`.`jobs`, CONSTRAINT `fk_jobs_recruiter` FOREIGN KEY (`recruiter_id`) REFERENCES `recruiters` (`recruiter_id`) ON DELETE CASCADE)
+INFO:2025/03/23 14:35:57 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 14:35:58 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 14:46:32 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 14:46:33 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 14:52:04 jobServices.go:19: Recruiter Not Found record not found
+INFO:2025/03/23 16:31:54 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 16:31:55 db_initialize.go:32: AutoMigrate failed: Error 1067 (42000): Invalid default value for 'applied_at'
+INFO:2025/03/23 16:31:55 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 16:35:02 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 16:35:03 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 16:39:49 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 16:39:51 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 16:45:29 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 16:45:30 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 21:27:15 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 21:27:17 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 21:27:47 applicationService.go:34: User has already applied for this job
+INFO:2025/03/23 21:28:18 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 21:28:19 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 21:56:22 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 21:56:23 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 22:01:53 applicationService.go:23: User Not Found record not found
+INFO:2025/03/23 22:05:10 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 22:05:11 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/23 22:09:08 applicationService.go:64: Error in Application Creation Error 1146 (42S02): Table 'job_portal_db.applications' doesn't exist
+INFO:2025/03/23 22:09:28 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/23 22:09:29 db_initialize.go:35: Database connected successfully
+INFO:2025/03/23 23:22:11 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+ERROR:2025/03/23 23:22:13 db_initialize.go:32: AutoMigrate failed: Error 6125 (HY000): Failed to add the foreign key constraint. Missing unique key for constraint 'fk_jobs_recruiter' in the referenced table 'jobs'
+INFO:2025/03/23 23:22:13 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 10:15:21 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 10:15:23 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 10:16:28 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 10:16:29 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/24 10:28:25 applicationService.go:23: User Not Found record not found
+INFO:2025/03/24 10:35:07 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 10:35:08 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 12:29:59 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 12:30:01 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/24 12:31:27 recruiterService.go:24: Error in Recruiter Creation Error 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`job_portal_db`.`recruiters`, CONSTRAINT `fk_jobs_recruiter` FOREIGN KEY (`recruiter_id`) REFERENCES `jobs` (`job_id`) ON DELETE CASCADE ON UPDATE CASCADE)
+INFO:2025/03/24 12:33:00 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 12:33:01 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 12:33:41 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 12:33:42 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/24 12:39:25 applicationService.go:34: User has already applied for this job
+INFO:2025/03/24 13:09:47 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:09:49 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:13:23 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:13:25 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:13:43 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:13:44 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:15:58 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:16:00 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:18:09 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:18:11 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:19:02 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:19:03 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:22:50 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:22:52 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:23:19 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:23:21 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:23:50 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:23:51 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:25:05 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:25:06 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:25:48 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:25:50 db_initialize.go:35: Database connected successfully
+INFO:2025/03/24 13:26:23 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/24 13:26:24 db_initialize.go:35: Database connected successfully
+INFO:2025/03/25 14:20:45 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/25 14:20:46 db_initialize.go:35: Database connected successfully
+INFO:2025/03/25 14:52:53 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/25 14:52:54 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/25 14:53:41 jobServices.go:49: Recruiter ID 5 not found
+ERROR:2025/03/25 14:53:41 jobServices.go:49: Recruiter ID 4 not found
+INFO:2025/03/25 15:00:50 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/25 15:00:52 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/25 15:03:01 jobServices.go:49: Recruiter ID 5 not found
+ERROR:2025/03/25 15:03:01 jobServices.go:49: Recruiter ID 5 not found
+INFO:2025/03/25 15:22:24 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/25 15:22:26 db_initialize.go:35: Database connected successfully
+ERROR:2025/03/25 15:22:35 jobServices.go:50: Recruiter ID 5 not found
+ERROR:2025/03/25 15:22:35 jobServices.go:50: Recruiter ID 5 not found
+INFO:2025/03/25 16:13:49 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/03/25 16:13:51 db_initialize.go:35: Database connected successfully
+INFO:2025/05/26 11:16:28 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/05/26 11:16:30 db_initialize.go:35: Database connected successfully
+ERROR:2025/05/26 11:18:58 userService.go:39: User Not Found record not found
+INFO:2025/06/02 14:24:47 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/06/02 14:24:48 db_initialize.go:35: Database connected successfully
+INFO:2025/06/03 07:23:59 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/06/03 07:24:01 db_initialize.go:35: Database connected successfully
+ERROR:2025/06/03 07:26:49 userService.go:27: Error in User Creation Error 1062 (23000): Duplicate entry '9876543210' for key 'users.uni_users_contact'
+INFO:2025/06/03 20:10:47 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/06/03 20:10:49 db_initialize.go:35: Database connected successfully
+INFO:2025/06/03 20:12:48 db_initialize.go:21: Connecting to DB with DSN: test:pass@tcp(localhost:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/06/03 20:12:49 db_initialize.go:35: Database connected successfully
+INFO:2025/06/03 22:23:38 db_initialize.go:31: Connecting to DB with DSN: test:pass@tcp(127.0.0.1:3306)/job_adoptiondb?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/06/03 22:24:09 db_initialize.go:31: Connecting to DB with DSN: test:pass@tcp(127.0.0.1:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/06/03 22:24:09 db_initialize.go:44: Database connected successfully
+ERROR:2025/06/03 22:24:24 userService.go:27: Error in User Creation Error 1062 (23000): Duplicate entry '9876646210' for key 'users.uni_users_contact'
+INFO:2025/06/03 23:56:33 db_initialize.go:31: Connecting to DB with DSN: test:pass@tcp(127.0.0.1:3306)/job_portal_db?charset=utf8mb4&parseTime=True&loc=Local
+INFO:2025/06/03 23:56:33 db_initialize.go:44: Database connected successfully

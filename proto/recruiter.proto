@@ -1,0 +1,77 @@
+syntax="proto3";
+
+option go_package="./pb_file";
+
+import "google/api/annotations.proto";
+
+
+service RecruiterService {
+    rpc CreateRecruiter(RecruiterRequest) returns (RecruiterResponse) {
+        option (google.api.http) = {
+            post: "/recruiters"
+            body: "*"
+        };
+    }
+    
+
+    rpc GetRecruiter(RecruiterID) returns (RecruiterGetResponse) {
+        option (google.api.http) = {
+            get: "/recruiters/{recruiter_id}"
+        };
+    }
+
+    rpc ListRecruiters(RecruiterEmpty) returns (RecruiterListResponse) {
+        option (google.api.http) = {
+            get: "/recruiters"
+        };
+    }
+
+    rpc UpdateRecruiter(UpdateRecruiterRequest) returns (RecruiterResponse) {
+        option (google.api.http) = {
+            put: "/recruiters/{recruiter_id}"
+            body: "*"
+        };
+    }
+
+    rpc DeleteRecruiter(RecruiterID) returns (RecruiterResponse) {
+        option (google.api.http) = {
+            delete: "/recruiters/{recruiter_id}"
+        };
+    }
+}
+
+message RecruiterRequest {
+    string name = 1;
+    string contact = 2;
+    string company_name = 3;
+}
+
+message RecruiterResponse{
+    string message=1;
+}
+
+message UpdateRecruiterRequest {
+    int32 recruiter_id = 1; 
+    string name = 2;
+    string contact = 3;
+    string company_name = 4;
+}
+
+message RecruiterID {
+    int32 recruiter_id = 1; 
+}
+
+message RecruiterGetResponse {
+    int32 recruiter_id = 1; 
+    string name = 2;
+    string contact = 3;
+    string company_name = 4;
+}
+
+message RecruiterListResponse {
+    repeated RecruiterGetResponse recruiters = 1;
+}
+
+message RecruiterEmpty{
+    
+}

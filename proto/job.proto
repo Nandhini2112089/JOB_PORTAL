@@ -1,0 +1,60 @@
+syntax="proto3";
+
+option go_package="./pb_file";
+
+import "google/api/annotations.proto";
+
+service JobService{
+    rpc CreateJob(JobRequest)returns(JobResponse){
+        option (google.api.http) = {
+            post: "/jobs"
+            body: "*"
+        };
+    }
+
+    rpc CreateJobs(BatchJobRequest) returns (BatchJobResponse) {
+        option (google.api.http) = {
+            post: "/jobs/batch"
+            body: "*"
+        };
+    }
+    rpc GetJob(JobID)returns(JobRequest){
+        option (google.api.http) = {
+            get: "/jobs/{id}"
+        };
+    }
+    rpc DeletJob(JobID)returns(JobResponse){
+         option (google.api.http) = {
+            delete: "/jobs/{id}"
+        };
+    }
+}
+message JobRequest{
+    int32 recruiter_id=1;
+    string title=2;
+    string description=3;
+    string skills_required=4;
+    string location=5;
+    double salary=6;
+    string job_type=7;
+}
+
+message JobResponse{
+    string message=1;
+}
+message JobID{
+    int32 id=1;
+}
+
+message BatchJobRequest {
+    repeated JobRequest jobs = 1;
+}
+
+message BatchJobResponse {
+    string message=1;
+    repeated string errors = 2;
+}
+
+
+
+
