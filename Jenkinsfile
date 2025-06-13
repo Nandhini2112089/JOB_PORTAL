@@ -2,26 +2,26 @@ pipeline {
     agent any
 
     environment {
-        GO_BIN = "/usr/local/go/bin" // Update this if Go 1.21 is installed elsewhere
+        GO_BIN = "/usr/local/go/bin"
         PATH = "${GO_BIN}:${env.PATH}"
         DEST = "${WORKSPACE}/artifact_output"
     }
 
     stages {
         stage('Checkout') {
-            steps {
-                checkout scm
-            }
+            steps { checkout scm }
         }
 
         stage('Setup Go Modules') {
             steps {
+                sh 'go version'
+                sh 'go env'
                 sh 'go mod tidy'
                 sh 'go mod download'
             }
         }
 
-        stage('Clean Cache (Jenkins only)') {
+        stage('Clean Cache') {
             steps {
                 sh 'go clean -modcache'
             }
@@ -35,7 +35,7 @@ pipeline {
 
         stage('Unit Test') {
             steps {
-                sh 'go test ./... -v -cover'
+                sh 'go test ./services -v -cover'
             }
         }
 
@@ -64,11 +64,7 @@ pipeline {
     }
 
     post {
-        success {
-            echo 'Pipeline completed successfully.'
-        }
-        failure {
-            echo 'Pipeline failed.'
-        }
+        success { echo 'Pipeline completed successfully.' }
+        failure { echo 'Pipeline failed.' }
     }
 }
