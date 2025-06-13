@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GO_BIN = "/usr/local/go/bin"
+        GO_BIN = "/usr/local/go/bin" // Update this if Go 1.21 is installed elsewhere
         PATH = "${GO_BIN}:${env.PATH}"
         DEST = "${WORKSPACE}/artifact_output"
     }
@@ -14,9 +14,16 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Setup Go Modules') {
             steps {
                 sh 'go mod tidy'
+                sh 'go mod download'
+            }
+        }
+
+        stage('Clean Cache (Jenkins only)') {
+            steps {
+                sh 'go clean -modcache'
             }
         }
 
