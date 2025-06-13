@@ -1,6 +1,6 @@
 module DB_GORM
 
-go 1.23.0
+go 1.21
 
 
 require (
