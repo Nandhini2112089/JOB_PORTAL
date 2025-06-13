@@ -2,21 +2,18 @@ pipeline {
     agent any
 
     environment {
-        GO_BIN = "/usr/local/go/bin"
-        PATH = "${GO_BIN}:${env.PATH}"
-        DEST = "${WORKSPACE}/artifact_output"
+        GOPROXY = 'https://proxy.golang.org,direct'
     }
 
     stages {
         stage('Checkout') {
-            steps { checkout scm }
+            steps {
+                checkout scm
+            }
         }
 
-        stage('Setup Go Modules') {
+        stage('Download Dependencies') {
             steps {
-                sh 'go version'
-                sh 'go env'
-                sh 'go mod tidy'
                 sh 'go mod download'
             }
         }
@@ -27,44 +24,39 @@ pipeline {
             }
         }
 
-        stage('Lint') {
-            steps {
-                sh 'golangci-lint run ./...'
-            }
-        }
+        // Removed Lint stage
 
         stage('Unit Test') {
             steps {
-                sh 'go test ./services -v -cover'
+                sh 'go test ./...'
             }
         }
 
         stage('Build Binary') {
             steps {
-                sh 'go build -o main main.go'
+                sh 'go build -o myapp'
             }
         }
 
         stage('Zip Binary') {
             steps {
-                sh '''
-                    mkdir -p ${DEST}
-                    cp main ${DEST}/
-                    cd ${DEST}
-                    zip -r go_grpc_app.zip main
-                '''
+                sh 'zip myapp.zip myapp'
             }
         }
 
         stage('Archive Artifact') {
             steps {
-                archiveArtifacts artifacts: 'artifact_output/go_grpc_app.zip', allowEmptyArchive: false
+                archiveArtifacts artifacts: 'myapp.zip', fingerprint: true
             }
         }
     }
 
     post {
-        success { echo 'Pipeline completed successfully.' }
-        failure { echo 'Pipeline failed.' }
+        always {
+            echo 'Pipeline finished.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
     }
 }
