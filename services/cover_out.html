@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>services: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">DB_GORM/services/applicationService.go (0.0%)</option>
+				
+				<option value="file1">DB_GORM/services/jobServices.go (0.0%)</option>
+				
+				<option value="file2">DB_GORM/services/recruiterService.go (0.0%)</option>
+				
+				<option value="file3">DB_GORM/services/userService.go (60.9%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package services
+
+import (
+        db "DB_GORM/DB"
+        "DB_GORM/models"
+        pb "DB_GORM/pb_file"
+        "DB_GORM/utils"
+        "context"
+        "fmt"
+        "strings"
+        "time"
+
+        "google.golang.org/protobuf/types/known/timestamppb"
+)
+
+type Application struct {
+        pb.UnimplementedApplicationServiceServer
+}
+
+func (a *Application) CreateApplication(ctx context.Context, req *pb.ApplicationRequest) (*pb.ApplicationResponse, error) <span class="cov0" title="0">{
+        var user models.User
+        if err := db.DB.First(&amp;user, req.UserId).Error; err != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("User Not Found", err)
+                return nil, fmt.Errorf("User with ID %d not found", req.UserId)
+        }</span>
+        <span class="cov0" title="0">var job models.Job
+        if err := db.DB.First(&amp;job, req.JobId).Error; err != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Job Not Found", err)
+                return nil, fmt.Errorf("Job with ID %d not found", req.JobId)
+        }</span>
+        <span class="cov0" title="0">var count int64
+        db.DB.Model(&amp;models.Application{}).Where("user_id = ? AND job_id = ?", req.UserId, req.JobId).Count(&amp;count)
+        if count &gt; 0 </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("User has already applied for this job")
+                return nil, fmt.Errorf("User has already applied for this job")
+        }</span>
+
+        <span class="cov0" title="0">userSkills := strings.Split(strings.ToLower(user.Skills), ",")
+        jobSkills := strings.Split(strings.ToLower(job.SkillsRequired), ",")
+
+        skillSet := make(map[string]bool)
+        var status string = "Rejected"
+
+        for _, skill := range userSkills </span><span class="cov0" title="0">{
+                skillSet[skill] = true
+        }</span>
+
+        <span class="cov0" title="0">for _, skill := range jobSkills </span><span class="cov0" title="0">{
+                if skillSet[skill] </span><span class="cov0" title="0">{
+                        status = "Shortlisted"
+                        break</span>
+                }
+        }
+
+        <span class="cov0" title="0">application := models.Application{
+                UserID:    uint(req.UserId),
+                JobID:     uint(req.JobId),
+                Status:    status,
+                AppliedAt: time.Now(),
+        }
+        data := db.DB.Create(&amp;application)
+
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Error in Application Creation", data.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">if status == "Shortlisted" </span><span class="cov0" title="0">{
+                var recruiter models.Recruiter
+                if err := db.DB.First(&amp;recruiter, job.RecruiterID).Error; err != nil </span><span class="cov0" title="0">{
+                        utils.ErrorLog.Println("Error fetching recruiter details:", err)
+                        return nil, err
+                }</span>
+                <span class="cov0" title="0">interview := models.Interview{
+                        ApplicationID: application.ApplicationID,
+                        UserID:        application.UserID,
+                        JobID:         application.JobID,
+                        CompanyName:   recruiter.CompanyName,
+                        RecruiterID:   job.RecruiterID,
+                        RecruiterName: recruiter.Name,
+                        InterviewTime: time.Now().Add(48 * time.Hour),
+                }
+
+                if err := db.DB.Create(&amp;interview).Error; err != nil </span><span class="cov0" title="0">{
+                        utils.ErrorLog.Println("Error in Interview Scheduling", err)
+                        return nil, err
+                }</span>
+        }
+        <span class="cov0" title="0">return &amp;pb.ApplicationResponse{
+                Message: "Application Created Successfully!!",
+        }, nil</span>
+}
+
+func (a *Application) GetApplication(ctx context.Context, req *pb.ApplicationID) (*pb.ApplicationGetResponse, error) <span class="cov0" title="0">{
+        var application models.Application
+        data := db.DB.First(&amp;application, req.Id)
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Application Not Found", data.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.ApplicationGetResponse{
+                UserId:    int32(application.UserID),
+                JobId:     int32(application.JobID),
+                Status:    application.Status,
+                AppliedAt: timestamppb.New(application.AppliedAt),
+        }, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package services
+
+import (
+        db "DB_GORM/DB"
+        "DB_GORM/models"
+        pb "DB_GORM/pb_file"
+        "DB_GORM/utils"
+        "context"
+        "fmt"
+)
+
+type Job struct {
+        pb.UnimplementedJobServiceServer
+}
+
+func (j *Job) CreateJob(ctx context.Context, req *pb.JobRequest) (*pb.JobResponse, error) <span class="cov0" title="0">{
+        var recruiter models.Recruiter
+        if err := db.DB.First(&amp;recruiter, req.RecruiterId).Error; err != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Recruiter Not Found", err)
+                return nil, fmt.Errorf("recruiter with ID %d not found", req.RecruiterId)
+        }</span>
+        <span class="cov0" title="0">job := models.Job{
+                RecruiterID:    uint(req.RecruiterId),
+                Title:          req.Title,
+                Description:    req.Description,
+                SkillsRequired: req.SkillsRequired,
+                Location:       req.Location,
+                Salary:         req.Salary,
+                JobType:        req.JobType,
+        }
+        data := db.DB.Create(&amp;job)
+
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Error in Job Creation", data.Error)
+                return nil, data.Error
+        }</span>
+        <span class="cov0" title="0">return &amp;pb.JobResponse{
+                Message: "Job Created Successfully!!",
+        }, nil</span>
+}
+
+func (j *Job) CreateJobs(ctx context.Context, req *pb.BatchJobRequest) (*pb.BatchJobResponse, error) <span class="cov0" title="0">{
+        var jobs []models.Job
+        var errors []string
+
+        for _, jobReq := range req.Jobs </span><span class="cov0" title="0">{
+                var recruiter models.Recruiter
+                if err := db.DB.First(&amp;recruiter, jobReq.RecruiterId).Error; err != nil </span><span class="cov0" title="0">{
+                        errMsg := fmt.Sprintf("Recruiter ID %d not found", jobReq.RecruiterId)
+                        utils.ErrorLog.Println(errMsg)
+                        errors = append(errors, errMsg)
+                        continue</span>
+                }
+
+                <span class="cov0" title="0">jobs = append(jobs, models.Job{
+                        RecruiterID:    uint(jobReq.RecruiterId),
+                        Title:          jobReq.Title,
+                        Description:    jobReq.Description,
+                        SkillsRequired: jobReq.SkillsRequired,
+                        Location:       jobReq.Location,
+                        Salary:         jobReq.Salary,
+                        JobType:        jobReq.JobType,
+                })</span>
+        }
+
+        <span class="cov0" title="0">if err := db.DB.Create(&amp;jobs).Error; err != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Error in Batch Job Creation", err)
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.BatchJobResponse{
+                Message: "Batch Job Processing Completed",
+                Errors:  errors,
+        }, nil</span>
+}
+
+func (j *Job) GetJob(ctx context.Context, req *pb.JobID) (*pb.JobRequest, error) <span class="cov0" title="0">{
+        var job models.Job
+        data := db.DB.First(&amp;job, req.Id)
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Job Not Found", data.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.JobRequest{
+                Title:          job.Title,
+                Description:    job.Description,
+                SkillsRequired: job.SkillsRequired,
+                Location:       job.Location,
+                Salary:         job.Salary,
+                JobType:        job.JobType,
+        }, nil</span>
+}
+
+func (j *Job) DeleteJob(ctx context.Context, req *pb.JobID) (*pb.JobResponse, error) <span class="cov0" title="0">{
+        var job models.Job
+
+        data := db.DB.First(&amp;job, req.Id)
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Job Not Found", data.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">data1 := db.DB.Delete(&amp;job)
+        if data1.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Job Not able to Delete", data1.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.JobResponse{
+                Message: "Job Deleted Successfully...",
+        }, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package services
+
+import (
+        db "DB_GORM/DB"
+        "DB_GORM/models"
+        pb "DB_GORM/pb_file"
+        "DB_GORM/utils"
+        "context"
+)
+
+type Recruiter struct {
+        pb.UnimplementedRecruiterServiceServer
+}
+
+func (r *Recruiter) CreateRecruiter(ctx context.Context, req *pb.RecruiterRequest) (*pb.RecruiterResponse, error) <span class="cov0" title="0">{
+        recruiter := models.Recruiter{
+                Name:        req.Name,
+                Contact:     req.Contact,
+                CompanyName: req.CompanyName,
+        }
+        data := db.DB.Create(&amp;recruiter)
+
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Error in Recruiter Creation", data.Error)
+                return nil, data.Error
+        }</span>
+        <span class="cov0" title="0">return &amp;pb.RecruiterResponse{
+                Message: "Recruiter Created Successfully!!",
+        }, nil</span>
+}
+
+func (r *Recruiter) GetRecruiter(ctx context.Context, req *pb.RecruiterID) (*pb.RecruiterGetResponse, error) <span class="cov0" title="0">{
+        var recruiter models.Recruiter
+        data := db.DB.First(&amp;recruiter, req.RecruiterId)
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Recruiter Not Found", data.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.RecruiterGetResponse{
+                RecruiterId: int32(recruiter.RecruiterID),
+                Name:        recruiter.Name,
+                Contact:     recruiter.Contact,
+                CompanyName: recruiter.CompanyName,
+        }, nil</span>
+}
+
+func (u *User) UpdateRecruiter(ctx context.Context, req *pb.UpdateRecruiterRequest) (*pb.RecruiterResponse, error) <span class="cov0" title="0">{
+        var recruiter models.Recruiter
+        data := db.DB.First(&amp;recruiter, req.RecruiterId)
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Recruiter Not Found", data.Error)
+                return nil, data.Error
+        }</span>
+        <span class="cov0" title="0">recruiter.Name = req.Name
+        recruiter.Contact = req.Contact
+        recruiter.CompanyName = req.CompanyName
+
+        data1 := db.DB.Save(&amp;recruiter)
+
+        if data1.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Recruiter Not able to Update..", data1.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.RecruiterResponse{
+                Message: "User Updated Successfully...",
+        }, nil</span>
+}
+
+func (r *Recruiter) DeleteRecruiter(ctx context.Context, req *pb.RecruiterID) (*pb.RecruiterResponse, error) <span class="cov0" title="0">{
+        var recruiter models.Recruiter
+
+        data := db.DB.First(&amp;recruiter, req.RecruiterId)
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Recruiter Not Found", data.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">data1 := db.DB.Delete(&amp;recruiter)
+        if data1.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Recruiter Not able to delete..", data1.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.RecruiterResponse{
+                Message: "Recruiter Deleted Successfully...",
+        }, nil</span>
+}
+
+func (r *Recruiter) ListRecruiters(ctx context.Context, req *pb.RecruiterEmpty) (*pb.RecruiterListResponse, error) <span class="cov0" title="0">{
+        var recruiters []models.Recruiter
+        data := db.DB.Find(&amp;recruiters)
+        if data.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("Recruiters Not Found", data.Error)
+                return nil, data.Error
+        }</span>
+
+        <span class="cov0" title="0">var recruiterResponses []*pb.RecruiterGetResponse
+
+        for _, recruiter := range recruiters </span><span class="cov0" title="0">{
+                recruiterResponses = append(recruiterResponses, &amp;pb.RecruiterGetResponse{
+                        RecruiterId: int32(recruiter.RecruiterID),
+                        Name:        recruiter.Name,
+                        Contact:     recruiter.Contact,
+                        CompanyName: recruiter.CompanyName,
+                })
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.RecruiterListResponse{Recruiters: recruiterResponses}, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package services
+
+import (
+        "DB_GORM/models"
+        pb "DB_GORM/pb_file"
+        "DB_GORM/utils"
+        "context"
+        "log"
+
+        "google.golang.org/grpc/codes"
+        "google.golang.org/grpc/status"
+        "gorm.io/gorm"
+)
+
+type User struct {
+        pb.UnimplementedUserserviceServer
+        DB *gorm.DB
+}
+
+func (u *User) CreateUser(ctx context.Context, req *pb.UserRequest) (*pb.UserResponse, error) <span class="cov8" title="1">{
+        user := models.User{
+                Name:            req.Name,
+                Contact:         req.Contact,
+                Skills:          req.Skills,
+                Age:             int(req.Age),
+                ExperienceYears: int(req.ExperienceYears),
+                Education:       req.Education,
+        }
+        result := u.DB.Create(&amp;user)
+        if result.Error != nil </span><span class="cov8" title="1">{
+                utils.ErrorLog.Println("Error in User Creation:", result.Error)
+                return nil, result.Error
+        }</span>
+        <span class="cov8" title="1">return &amp;pb.UserResponse{Message: "User Created Successfully!!"}, nil</span>
+}
+
+func (u *User) GetUser(ctx context.Context, req *pb.UserID) (*pb.GetResponse, error) <span class="cov8" title="1">{
+        var user models.User
+        result := u.DB.First(&amp;user, req.Id)
+        if result.Error != nil </span><span class="cov8" title="1">{
+                utils.ErrorLog.Println("User Not Found:", result.Error)
+                return nil, result.Error
+        }</span>
+        <span class="cov8" title="1">return &amp;pb.GetResponse{
+                Name:            user.Name,
+                Contact:         user.Contact,
+                Skills:          user.Skills,
+                Age:             int32(user.Age),
+                ExperienceYears: int32(user.ExperienceYears),
+                Education:       user.Education,
+        }, nil</span>
+}
+
+func (u *User) UpdateUser(ctx context.Context, req *pb.UpdateRequest) (*pb.UserResponse, error) <span class="cov0" title="0">{
+        var user models.User
+        result := u.DB.First(&amp;user, req.Id)
+        if result.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("User Not Found:", result.Error)
+                return nil, result.Error
+        }</span>
+
+        <span class="cov0" title="0">user.Name = req.Name
+        user.Contact = req.Contact
+        user.Skills = req.Skills
+        user.Age = int(req.Age)
+        user.ExperienceYears = int(req.ExperienceYears)
+        user.Education = req.Education
+
+        saveResult := u.DB.Save(&amp;user)
+        if saveResult.Error != nil </span><span class="cov0" title="0">{
+                utils.ErrorLog.Println("User Not Updated:", saveResult.Error)
+                return nil, saveResult.Error
+        }</span>
+
+        <span class="cov0" title="0">return &amp;pb.UserResponse{Message: "User Updated Successfully!!"}, nil</span>
+}
+
+func (u *User) DeleteUser(ctx context.Context, req *pb.UserID) (*pb.UserResponse, error) <span class="cov8" title="1">{
+        var user models.User
+        if err := u.DB.First(&amp;user, req.Id).Error; err != nil </span><span class="cov8" title="1">{
+                log.Println("Error finding user:", err)
+                return nil, status.Errorf(codes.NotFound, "User Not Found!!")
+        }</span>
+
+        <span class="cov8" title="1">if err := u.DB.Delete(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
+
+                log.Println("Error deleting user:", err)
+                return nil, status.Errorf(codes.Internal, "Failed to delete user")
+        }</span>
+
+        <span class="cov8" title="1">log.Println("Deleted user:", user)
+        return &amp;pb.UserResponse{Message: "User Deleted Successfully!!"}, nil</span>
+}
+
+func (u *User) ListUser(ctx context.Context, req *pb.Empty) (*pb.ListResponse, error) <span class="cov8" title="1">{
+        var users []models.User
+        result := u.DB.Find(&amp;users)
+        if result.Error != nil </span><span class="cov8" title="1">{
+                utils.ErrorLog.Println("Users Not Found:", result.Error)
+                return nil, result.Error
+        }</span>
+
+        <span class="cov8" title="1">var userResponses []*pb.GetResponse
+        for _, user := range users </span><span class="cov8" title="1">{
+                userResponses = append(userResponses, &amp;pb.GetResponse{
+                        Name:            user.Name,
+                        Contact:         user.Contact,
+                        Skills:          user.Skills,
+                        Age:             int32(user.Age),
+                        ExperienceYears: int32(user.ExperienceYears),
+                        Education:       user.Education,
+                })
+        }</span>
+
+        <span class="cov8" title="1">return &amp;pb.ListResponse{Users: userResponses}, nil</span>
+}
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
