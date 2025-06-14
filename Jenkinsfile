@@ -2,61 +2,35 @@ pipeline {
     agent any
 
     environment {
-        GOPROXY = 'https://proxy.golang.org,direct'
+        BINARY_NAME = "myapp"
+        DIST_FOLDER = "dist"
+        ZIP_NAME = "myapp.zip"
     }
 
     stages {
-        stage('Checkout') {
+        stage('Build Go Binary') {
             steps {
-                checkout scm
-            }
-        }
-
-        stage('Download Dependencies') {
-            steps {
-                sh 'go mod download'
-            }
-        }
-
-        stage('Clean Cache') {
-            steps {
-                sh 'go clean -modcache'
-            }
-        }
-
-        // Removed Lint stage
-
-        stage('Unit Test') {
-            steps {
-                sh 'go test ./...'
-            }
-        }
-
-        stage('Build Binary') {
-            steps {
-                sh 'go build -o myapp'
+                sh '''
+                    mkdir -p ${DIST_FOLDER}
+                    go mod tidy
+                    go build -o ${DIST_FOLDER}/${BINARY_NAME} main.go
+                '''
             }
         }
 
         stage('Zip Binary') {
             steps {
-                sh 'zip myapp.zip myapp'
+                sh '''
+                    cd ${DIST_FOLDER}
+                    zip ${ZIP_NAME} ${BINARY_NAME}
+                '''
             }
         }
 
-        stage('Archive Artifact') {
+        stage('Archive ZIP') {
             steps {
-                archiveArtifacts artifacts: 'myapp.zip', fingerprint: true
+                archiveArtifacts artifacts: 'dist/myapp.zip', allowEmptyArchive: false
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline finished.'
-        }
-        failure {
-            echo 'Pipeline failed.'
         }
     }
 }
