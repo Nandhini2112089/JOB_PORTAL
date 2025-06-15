@@ -77,4 +77,36 @@ pipeline {
             }
         }
     }
+    post {
+    success {
+        emailext(
+            to: 'nandhinibalamurugan2003@gmail.com',
+            subject: " $JOB_NAME - Build #$BUILD_NUMBER - SUCCESS",
+            body: """
+Build Successful!
+
+Job: $JOB_NAME  
+Build Number: $BUILD_NUMBER  
+
+Check console output here: $BUILD_URL
+"""
+        )
+    }
+
+    failure {
+        emailext(
+            to: 'nandhinibalamurugan2003@gmail.com',
+            subject: " $JOB_NAME - Build #$BUILD_NUMBER - FAILED",
+            body: """
+ Build Failed!
+
+Job: $JOB_NAME  
+Build Number: $BUILD_NUMBER  
+
+Check what went wrong: $BUILD_URL
+"""
+        )
+    }
+}
+
 }
