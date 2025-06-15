@@ -50,14 +50,12 @@ func Initialize() {
 }
 
 func loadYMLConfig() {
-	viper.AddConfigPath("./Config")
-	viper.SetConfigName("config")
-	viper.SetConfigType("yml")
+	viper.AddConfigPath(".")
+viper.SetConfigName("config")
+viper.SetConfigType("yml")
+if err := viper.ReadInConfig(); err != nil {
+    log.Fatalf("read config: %v", err)
+}
 
-	err := viper.ReadInConfig()
-	if err != nil {
-		fmt.Printf("Error reading config file: %v\n", err)
-		osExit(1)
-	}
 
 }
