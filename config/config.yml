@@ -10,5 +10,5 @@ prod:
   db_port: 3306
   username: "test"
   password: "pass"
-  dbname: mydb
+  dbname: "job_portal_db"
 
