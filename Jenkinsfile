@@ -34,11 +34,15 @@
 //         }
 //     }
 // }
+
+
+
 pipeline {
     agent any
 
     environment {
         IMAGE_NAME = 'sivanandhini23/db_gorm_app'
+        EMAIL_RECIPIENT = 'nandhinibalamurugan2003@gmail.com'
     }
 
     stages {
@@ -70,43 +74,53 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                sh '''
+                 sh '''
                 docker login -u sivanandhini23 -p Nandhini@23
                 docker push $IMAGE_NAME:latest
                 '''
+               
             }
         }
     }
+
     post {
-    success {
-        emailext(
-            to: 'nandhinibalamurugan2003@gmail.com',
-            subject: " $JOB_NAME - Build #$BUILD_NUMBER - SUCCESS",
-            body: """
-Build Successful!
+        success {
+            script {
+                sleep 10 // delay to ensure SMTP readiness
+                emailext(
+                    to: "${EMAIL_RECIPIENT}",
+                    subject: "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - SUCCESS",
+                    body: """
+ Build Successful!
 
-Job: $JOB_NAME  
-Build Number: $BUILD_NUMBER  
+ Job: ${env.JOB_NAME}  
+ Build Number: ${env.BUILD_NUMBER}  
 
-Check console output here: $BUILD_URL
-"""
-        )
-    }
+ View Build Output: ${env.BUILD_URL}
+""",
+                    mimeType: 'text/plain'
+                )
+            }
+        }
 
-    failure {
-        emailext(
-            to: 'nandhinibalamurugan2003@gmail.com',
-            subject: " $JOB_NAME - Build #$BUILD_NUMBER - FAILED",
-            body: """
+        failure {
+            script {
+                sleep 10
+                emailext(
+                    to: "${EMAIL_RECIPIENT}",
+                    subject: "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - FAILED",
+                    body: """
  Build Failed!
 
-Job: $JOB_NAME  
-Build Number: $BUILD_NUMBER  
+ Job: ${env.JOB_NAME}  
+ Build Number: ${env.BUILD_NUMBER}  
 
-Check what went wrong: $BUILD_URL
-"""
-        )
+ Check console output: ${env.BUILD_URL}
+""",
+                    mimeType: 'text/plain'
+                )
+            }
+        }
     }
 }
 
-}
