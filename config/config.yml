@@ -6,7 +6,7 @@
 #   # db_name: "job_portal_db"
 
 prod:
-  host: db                # 👈 This matches the service name in docker-compose.yml
+  host: db
   port: 3306
   username: myuser
   password: mypassword
