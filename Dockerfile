@@ -16,7 +16,8 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN go build -o main ./cmd/server
+RUN go build -o main .
+
 
 # -------- runtime stage ------
 FROM alpine:latest
