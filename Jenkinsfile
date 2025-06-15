@@ -38,17 +38,25 @@ pipeline {
     agent any
 
     environment {
-        
         IMAGE_NAME = 'sivanandhini23/db_gorm_app'
     }
 
     stages {
+        stage('Run Unit Tests') {
+            steps {
+                sh '''
+                export PATH=$PATH:/usr/local/go/bin
+                go mod tidy
+                go test ./... -v -cover
+                '''
+            }
+        }
+
         stage('Build Go Binary') {
             steps {
                 sh '''
                 export PATH=$PATH:/usr/local/go/bin
                 mkdir -p build
-                go mod tidy
                 go build -o build/app main.go
                 '''
             }
@@ -62,12 +70,10 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-               
-                    sh '''
-                    docker login -u sivanandhini23 -p Nandhini@23
-                    docker push $IMAGE_NAME:latest
-                    '''
-                
+                sh '''
+                docker login -u sivanandhini23 -p Nandhini@23
+                docker push $IMAGE_NAME:latest
+                '''
             }
         }
     }
