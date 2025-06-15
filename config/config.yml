@@ -8,7 +8,7 @@
 prod:
   db_host: host.docker.internal   # change later to compose service name “db”
   db_port: 3306
-  username: myuser
-  password: mypassword
+  username: "test"
+  password: "pass"
   dbname: mydb
 
