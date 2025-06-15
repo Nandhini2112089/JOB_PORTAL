@@ -1,35 +1,73 @@
+// pipeline {
+//     agent any
+
+//     environment {
+//         BINARY_NAME = "myapp"
+//         DIST_FOLDER = "dist"
+//         ZIP_NAME = "myapp.zip"
+//     }
+
+//     stages {
+//         stage('Build Go Binary') {
+//             steps {
+//                 sh '''
+//                     mkdir -p ${DIST_FOLDER}
+//                     go mod tidy
+//                     go build -o ${DIST_FOLDER}/${BINARY_NAME} main.go
+//                 '''
+//             }
+//         }
+
+//         stage('Zip Binary') {
+//             steps {
+//                 sh '''
+//                     cd ${DIST_FOLDER}
+//                     zip ${ZIP_NAME} ${BINARY_NAME}
+//                 '''
+//             }
+//         }
+
+//         stage('Archive ZIP') {
+//             steps {
+//                 archiveArtifacts artifacts: 'dist/myapp.zip', allowEmptyArchive: false
+//             }
+//         }
+//     }
+// }
 pipeline {
     agent any
 
     environment {
-        BINARY_NAME = "myapp"
-        DIST_FOLDER = "dist"
-        ZIP_NAME = "myapp.zip"
+        
+        IMAGE_NAME = 'sivanandhini23/db_gorm_app'
     }
 
     stages {
         stage('Build Go Binary') {
             steps {
                 sh '''
-                    mkdir -p ${DIST_FOLDER}
-                    go mod tidy
-                    go build -o ${DIST_FOLDER}/${BINARY_NAME} main.go
+                export PATH=$PATH:/usr/local/go/bin
+                mkdir -p build
+                go mod tidy
+                go build -o build/app main.go
                 '''
             }
         }
 
-        stage('Zip Binary') {
+        stage('Build Docker Image') {
             steps {
-                sh '''
-                    cd ${DIST_FOLDER}
-                    zip ${ZIP_NAME} ${BINARY_NAME}
-                '''
+                sh 'docker build -t $IMAGE_NAME:latest .'
             }
         }
 
-        stage('Archive ZIP') {
+        stage('Push to Docker Hub') {
             steps {
-                archiveArtifacts artifacts: 'dist/myapp.zip', allowEmptyArchive: false
+               
+                    sh '''
+                    sh 'docker login -u sivanandhini23 -p Nandhini@23'
+                    docker push $IMAGE_NAME:latest
+                    '''
+                
             }
         }
     }
