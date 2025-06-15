@@ -1,16 +1,16 @@
-FROM jenkins/jenkins:lts
+# Build stage
+FROM golang:1.21-alpine AS builder
 
-USER root
+WORKDIR /app
+COPY . .
 
-# Install Go 1.21 manually
-RUN apt-get update && \
-    apt-get install -y wget zip && \
-    wget https://go.dev/dl/go1.21.6.linux-amd64.tar.gz && \
-    rm -rf /usr/local/go && \
-    tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz && \
-    rm go1.21.6.linux-amd64.tar.gz
+RUN go mod tidy
+RUN go build -o myapp main.go
 
-# Set PATH for Go
-ENV PATH="/usr/local/go/bin:${PATH}"
+# Runtime stage
+FROM alpine:latest
 
-USER jenkins
+WORKDIR /root/
+COPY --from=builder /app/myapp .
+
+CMD ["./myapp"]
