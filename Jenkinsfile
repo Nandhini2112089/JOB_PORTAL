@@ -64,7 +64,7 @@ pipeline {
             steps {
                
                     sh '''
-                    sh 'docker login -u sivanandhini23 -p Nandhini@23'
+                    docker login -u sivanandhini23 -p Nandhini@23
                     docker push $IMAGE_NAME:latest
                     '''
                 
