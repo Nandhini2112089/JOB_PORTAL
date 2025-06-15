@@ -24,7 +24,7 @@ WORKDIR /root/
 
 # copy binary + config.yml
 COPY --from=builder /app/main .
-COPY Config/config.yml .
+COPY ./config/config.yml .
 
 EXPOSE 8080
 CMD ["./main"]
