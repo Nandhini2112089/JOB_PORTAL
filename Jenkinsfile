@@ -41,11 +41,13 @@ pipeline {
     agent any
 
     environment {
-        DIST_FOLDER = "binary"
-        ZIP_NAME = "job_portal.zip"
-        IMAGE_NAME = 'sivanandhini23/db_gorm_app'
-        EMAIL_RECIPIENT = 'nandhinibalamurugan2003@gmail.com'
+    DIST_FOLDER = "build"
+    BINARY_NAME = "app"
+    ZIP_NAME    = "job_portal.zip"
+    IMAGE_NAME  = "sivanandhini23/db_gorm_app"
+    EMAIL_RECIPIENT = "nandhinibalamurugan2003@gmail.com"
     }
+
 
     stages {
         stage('Run Unit Tests') {
