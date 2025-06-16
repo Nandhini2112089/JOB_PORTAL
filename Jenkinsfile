@@ -79,7 +79,7 @@ pipeline {
 
         stage('Archive ZIP') {
             steps {
-                archiveArtifacts artifacts: 'dist/myapp.zip', allowEmptyArchive: false
+                archiveArtifacts artifacts: 'binary/job_portal.zip', allowEmptyArchive: false
             }
         }
 
