@@ -10,7 +10,7 @@
 # CMD ["./main"]
 
 
-FROM golang:1.24-alpine AS builderAdd commentMore actions
+FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 COPY go.mod go.sum ./
